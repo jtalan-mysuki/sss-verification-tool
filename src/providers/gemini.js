@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { BaseProvider } from './base.js';
-import { VERIFICATION_PROMPT, parseProviderResponse } from './prompt.js';
+import { buildVerificationPrompt, parseProviderResponse } from './prompt.js';
 
 export class GeminiProvider extends BaseProvider {
   constructor(config) {
@@ -21,7 +21,7 @@ export class GeminiProvider extends BaseProvider {
     });
 
     const result = await model.generateContent([
-      VERIFICATION_PROMPT,
+      buildVerificationPrompt(new Date().toISOString()),
       { inlineData: { mimeType, data: imageBase64 } },
     ]);
 

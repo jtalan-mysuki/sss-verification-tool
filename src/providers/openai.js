@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { BaseProvider } from './base.js';
-import { VERIFICATION_PROMPT, parseProviderResponse } from './prompt.js';
+import { buildVerificationPrompt, parseProviderResponse } from './prompt.js';
 
 export class OpenAIProvider extends BaseProvider {
   constructor(config) {
@@ -22,7 +22,7 @@ export class OpenAIProvider extends BaseProvider {
         {
           role: 'user',
           content: [
-            { type: 'text', text: VERIFICATION_PROMPT },
+            { type: 'text', text: buildVerificationPrompt(new Date().toISOString()) },
             {
               type: 'image_url',
               image_url: { url: `data:${mimeType};base64,${imageBase64}`, detail: 'high' },

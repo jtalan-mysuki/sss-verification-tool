@@ -30,6 +30,12 @@ export class BaseProvider {
  * @property {number} confidence  - 0 to 1
  * @property {string} reasoning
  * @property {string[]} detectedFeatures
+ * @property {boolean} isScreenshot
+ * @property {string[]} screenshotIndicators
+ * @property {boolean} isDownloadedFromInternet
+ * @property {string[]} internetIndicators
+ * @property {boolean|null} isRecentPhoto  - null when recency cannot be determined
+ * @property {string} recencyEvidence
  * @property {string} provider
  * @property {string} model
  */

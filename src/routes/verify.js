@@ -40,7 +40,11 @@ router.post('/', upload.single('image'), async (req, res, next) => {
     const provider = getProvider(query.data.provider);
     const result = await provider.verifyImage(imageBase64, mimeType);
 
-    const verified = result.confidence >= config.verification.confidenceThreshold;
+    const verified =
+      result.confidence >= config.verification.confidenceThreshold &&
+      !result.isScreenshot &&
+      !result.isDownloadedFromInternet &&
+      result.isRecentPhoto !== false;
 
     return res.json({
       verified,

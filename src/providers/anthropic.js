@@ -1,5 +1,5 @@
 import { BaseProvider } from './base.js';
-import { VERIFICATION_PROMPT, parseProviderResponse } from './prompt.js';
+import { buildVerificationPrompt, parseProviderResponse } from './prompt.js';
 
 export class AnthropicProvider extends BaseProvider {
   constructor(config) {
@@ -29,7 +29,7 @@ export class AnthropicProvider extends BaseProvider {
               type: 'image',
               source: { type: 'base64', media_type: mimeType, data: imageBase64 },
             },
-            { type: 'text', text: VERIFICATION_PROMPT },
+            { type: 'text', text: buildVerificationPrompt(new Date().toISOString()) },
           ],
         },
       ],
